@@ -216,7 +216,7 @@ void Dsmr::receive_encrypted_telegram_() {
     if (this->crypt_telegram_len_ == 0 && this->crypt_bytes_read_ > 20) {
       // Complete header + data bytes
       this->crypt_telegram_len_ = 13 + (this->crypt_telegram_[11] << 8 | this->crypt_telegram_[12]);
-      ESP_LOGV(TAG, "Encrypted telegram length: %d bytes", this->crypt_telegram_len_);
+      ESP_LOGV(TAG, "MLAN Encrypted telegram length: %d bytes", this->crypt_telegram_len_);
     }
 
     // Check for the end of the encrypted telegram.
