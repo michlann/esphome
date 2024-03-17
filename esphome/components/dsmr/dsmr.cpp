@@ -278,7 +278,8 @@ void Dsmr::dump_config() {
   ESP_LOGCONFIG(TAG, "DSMR:");
   ESP_LOGCONFIG(TAG, "  Max telegram length: %d", this->max_telegram_len_);
   ESP_LOGCONFIG(TAG, "  Receive timeout: %.1fs", this->receive_timeout_ / 1e3f);
-  ESP_LOGCONFIG(TAG, "  Key: %s", this->decryption_key_.data());
+  // check for null pointer!
+  //ESP_LOGCONFIG(TAG, "  Key: %s", this->decryption_key_.data());
   if (this->request_pin_ != nullptr) {
     LOG_PIN("  Request Pin: ", this->request_pin_);
   }
