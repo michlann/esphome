@@ -226,11 +226,11 @@ void Dsmr::receive_encrypted_telegram_() {
     ESP_LOGV(TAG, "End of encrypted telegram found");
 
     //static const unsigned char *const key = {0x53,0xE5,0x60,0x7D,0x18,0xFF,0x82,0x85,0x5A,0x0B,0x9B,0x4A,0x38,0xFE,0x11,0x6B, 0};
-    static const unsigned char *const key = 0x53E5607D18FF82855A0B9B4A38FE116B;
+    //static const unsigned char *const key = 0x53E5607D18FF82855A0B9B4A38FE116B;
     // Decrypt the encrypted telegram.
     GCM<AES128> *gcmaes128{new GCM<AES128>()};
-    // gcmaes128->setKey(this->decryption_key_.data(), gcmaes128->keySize());
-    gcmaes128->setKey(key, gcmaes128->keySize());
+    gcmaes128->setKey(this->decryption_key_.data(), gcmaes128->keySize());
+    //gcmaes128->setKey(key, gcmaes128->keySize());
     // the iv is 8 bytes of the system title + 4 bytes frame counter
     // system title is at byte 2 and frame counter at byte 15
     for (int i = 10; i < 14; i++)
@@ -278,6 +278,7 @@ void Dsmr::dump_config() {
   ESP_LOGCONFIG(TAG, "DSMR:");
   ESP_LOGCONFIG(TAG, "  Max telegram length: %d", this->max_telegram_len_);
   ESP_LOGCONFIG(TAG, "  Receive timeout: %.1fs", this->receive_timeout_ / 1e3f);
+  ESP_LOGCONFIG(TAG, "  Key: %s", this->decryption_key_.data());
   if (this->request_pin_ != nullptr) {
     LOG_PIN("  Request Pin: ", this->request_pin_);
   }
