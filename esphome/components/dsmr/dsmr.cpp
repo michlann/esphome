@@ -229,7 +229,7 @@ void Dsmr::receive_encrypted_telegram_() {
     // Decrypt the encrypted telegram.
     GCM<AES128> *gcmaes128{new GCM<AES128>()};
     // gcmaes128->setKey(this->decryption_key_.data(), gcmaes128->keySize());
-    gcmaes128->setKey(&key, gcmaes128->keySize());
+    gcmaes128->setKey(&key[], gcmaes128->keySize());
     // the iv is 8 bytes of the system title + 4 bytes frame counter
     // system title is at byte 2 and frame counter at byte 15
     for (int i = 10; i < 14; i++)
