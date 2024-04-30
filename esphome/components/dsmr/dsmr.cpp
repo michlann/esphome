@@ -238,7 +238,7 @@ void Dsmr::receive_encrypted_telegram_() {
                        // the ciphertext start at byte 18
                        &this->crypt_telegram_[18],
                        // cipher size
-                       this->crypt_bytes_read_ - 17);
+                       this->crypt_bytes_read_ - 17 -13);
     delete gcmaes128;  // NOLINT(cppcoreguidelines-owning-memory)
 
     this->bytes_read_ = strnlen(this->telegram_, this->max_telegram_len_);
